@@ -9,6 +9,7 @@ regenerate instead. The generator is incremental: files are named by content has
 
     node tools/tts_gen.js --course ep1 --dry-run    # cost it out, writes nothing
     node tools/tts_gen.js --course ep1              # render the missing files
+    node tools/tts_gen.js --course ep1 --timings    # align word timings (no audio)
 
 `hash8` is djb2 over `"<normVersion> <rawSpokenText>"`, where `rawSpokenText` is
 exactly what the engine's `speakCard()` derives from `card.q`. Bumping
@@ -23,6 +24,7 @@ Layout:
 ```
 manifest.json
 audio/<lang>/*.mp3     # lang ∈ en-US, es-ES, cs-CZ, ru-RU
+audio/<lang>/*.json    # optional word-timing sidecar, same basename as its mp3
 ```
 
 ```json
@@ -30,6 +32,7 @@ audio/<lang>/*.mp3     # lang ∈ en-US, es-ES, cs-CZ, ru-RU
   "version": 1,
   "generatedAt": "<ISO8601>",
   "normVersion": 1,
+  "timings": true,
   "voices": {
     "<lang>": {
       "default": "<provider>:<voiceId>",
@@ -40,6 +43,44 @@ audio/<lang>/*.mp3     # lang ∈ en-US, es-ES, cs-CZ, ru-RU
   "cards": { "<lang>/<cardId>": "audio/<lang>/<cardId>-<hash8>.mp3" }
 }
 ```
+
+## Word-timing sidecars
+
+Beside each mp3 there may be a **sidecar** with the same basename:
+
+```
+audio/<lang>/<cardId>-<hash8>.mp3     the audio
+audio/<lang>/<cardId>-<hash8>.json    its word timings
+```
+
+```json
+{ "v": 1, "w": ["Suppose", "Epoch", "logs", "8×10²⁶", "FLOP,"], "s": [0, 0.56, 0.98, 4.18, 5.92] }
+```
+
+- `w` — the RAW spoken text split on whitespace: exactly `rawSpokenText(card.q).split(/\s+/)`,
+  the same token list the engine builds. No empty tokens.
+- `s` — the start second of each token, one per entry in `w`: 2 decimals, non-decreasing,
+  `s[0] >= 0`, every value strictly below the audio duration.
+
+Sharing the basename means sharing the hash: **edit a stem and both its mp3 and its
+timings are invalidated together**, because the new mp3 gets a new name and no sidecar.
+
+The mp3 speaks the *normalized* text — `8×10²⁶` is one token in `w` but four spoken
+words, "8 times 10 to the 26" — so `s` is not a word-per-word split of the audio. It is
+produced by transcribing the mp3 with `whisper-1` (word timestamps), aligning that
+transcript against a per-token normalization, and taking each raw token's start from the
+first normalized word it produced. A card that aligns poorly gets **no sidecar at all**:
+a missing one is a supported state, a wrong one is not.
+
+**The engine falls back to estimating word times when a sidecar is absent**, so sidecars
+are an enhancement, never a requirement — audio plays fine without them.
+
+`timings` at the manifest root is `true` only when **every** card in `cards` has its
+sidecar on disk. It is recomputed on every manifest write, so a freshly re-rendered stem
+(new basename, no sidecar yet) flips it back to `false`. `--prune` deletes any `.json`
+whose `.mp3` is gone.
+
+## Voices
 
 `voices` is metadata — the engine ignores it, and the generator rewrites it. A voice
 is chosen per language **and card class**: `mastery` for a part gate's dedicated
