@@ -30,7 +30,21 @@ audio/<lang>/*.mp3     # lang ∈ en-US, es-ES, cs-CZ, ru-RU
   "version": 1,
   "generatedAt": "<ISO8601>",
   "normVersion": 1,
-  "voices": { "<lang>": "<provider>:<voiceId>" },
+  "voices": {
+    "<lang>": {
+      "default": "<provider>:<voiceId>",
+      "mastery": "<provider>:<voiceId>",
+      "treasure": "<provider>:<voiceId>"
+    }
+  },
   "cards": { "<lang>/<cardId>": "audio/<lang>/<cardId>-<hash8>.mp3" }
 }
 ```
+
+`voices` is metadata — the engine ignores it, and the generator rewrites it. A voice
+is chosen per language **and card class**: `mastery` for a part gate's dedicated
+mastery-test cards, `treasure` for chest cards, `default` for everything else. Only
+the classes that actually have audio appear, so a language may carry just `default`.
+The class is not in the file name (`hash8` covers the text only), so re-voicing a
+class means deleting its mp3s and re-rendering — `tts_gen.js` prints the exact list
+and the deletion command when it detects the change.

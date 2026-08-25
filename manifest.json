@@ -1,9 +1,13 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-25T21:38:42.756Z",
+  "generatedAt": "2026-08-25T21:58:27.477Z",
   "normVersion": 1,
   "voices": {
-    "en-US": "openai:alloy"
+    "en-US": {
+      "default": "openai:alloy",
+      "mastery": "openai:onyx",
+      "treasure": "openai:fable"
+    }
   },
   "cards": {
     "en-US/e1": "audio/en-US/e1-ce3c2c33.mp3",
