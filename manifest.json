@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-18T20:10:23.941Z",
+  "generatedAt": "2026-09-18T20:17:16.978Z",
   "normVersion": 1,
   "timings": true,
   "voices": {
     "en-US": {
-      "default": "openai:alloy",
+      "default": "kokoro:af_heart",
       "mastery": "openai:onyx",
       "treasure": "openai:fable"
     }
