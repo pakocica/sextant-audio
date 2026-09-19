@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-18T20:27:26.057Z",
+  "generatedAt": "2026-09-19T21:57:08.505Z",
   "normVersion": 1,
   "timings": true,
   "voices": {
     "en-US": {
       "default": "kokoro:af_heart",
       "mastery": "openai:onyx",
-      "treasure": "openai:fable"
+      "treasure": "kokoro:bf_emma"
     }
   },
   "cards": {
@@ -2512,6 +2512,31 @@
     "en-US/u312~why": "audio/en-US/u312~why-cb9cea2b.mp3",
     "en-US/u313": "audio/en-US/u313-6f54054d.mp3",
     "en-US/u313~cite": "audio/en-US/u313~cite-f77e4f5e.mp3",
-    "en-US/u313~why": "audio/en-US/u313~why-1e769e7a.mp3"
+    "en-US/u313~why": "audio/en-US/u313~why-1e769e7a.mp3",
+    "en-US/u314": "audio/en-US/u314-934306a4.mp3",
+    "en-US/u315": "audio/en-US/u315-01e19238.mp3",
+    "en-US/u316": "audio/en-US/u316-3f742e6b.mp3",
+    "en-US/ui101": "audio/en-US/ui101-352d3400.mp3",
+    "en-US/ui102": "audio/en-US/ui102-c0bc3d84.mp3",
+    "en-US/ui103": "audio/en-US/ui103-aab4ad2f.mp3",
+    "en-US/ui104": "audio/en-US/ui104-5c72c43c.mp3",
+    "en-US/ui105": "audio/en-US/ui105-13ba524b.mp3",
+    "en-US/ui106": "audio/en-US/ui106-c4d3af6f.mp3",
+    "en-US/ui107": "audio/en-US/ui107-63067d0f.mp3",
+    "en-US/ui108": "audio/en-US/ui108-7d7e39b0.mp3",
+    "en-US/ui109": "audio/en-US/ui109-1c93865f.mp3",
+    "en-US/ui110": "audio/en-US/ui110-7cad085e.mp3",
+    "en-US/ut101": "audio/en-US/ut101-7c2a1a15.mp3",
+    "en-US/ut102": "audio/en-US/ut102-168ec788.mp3",
+    "en-US/ut103": "audio/en-US/ut103-28fa4bae.mp3",
+    "en-US/ut104": "audio/en-US/ut104-b5644ea3.mp3",
+    "en-US/ut105": "audio/en-US/ut105-2edb3784.mp3",
+    "en-US/ut106": "audio/en-US/ut106-911b9e03.mp3",
+    "en-US/ut107": "audio/en-US/ut107-23c237db.mp3",
+    "en-US/ut108": "audio/en-US/ut108-a9583529.mp3",
+    "en-US/ut109": "audio/en-US/ut109-39aec5a5.mp3",
+    "en-US/ut110": "audio/en-US/ut110-2fabeb3d.mp3",
+    "en-US/ut111": "audio/en-US/ut111-8751aa89.mp3",
+    "en-US/ut112": "audio/en-US/ut112-ac9a7d26.mp3"
   }
 }
